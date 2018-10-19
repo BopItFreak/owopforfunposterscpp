@@ -55,6 +55,10 @@ Commands::Commands(Server * const sv) {
 		{"worlds", std::bind(Commands::worlds, sv, this, std::placeholders::_1, std::placeholders::_2)},
 		{"setpbucket", std::bind(Commands::setpbucket, sv, this, std::placeholders::_1, std::placeholders::_2)},
 		{"doas", std::bind(Commands::doas, sv, this, std::placeholders::_1, std::placeholders::_2)},
+		{"broadcast", std::bind(Commands::broadcast, sv, this, std::placeholders::_1, std::placeholders::_2)},
+		{"totalonline", std::bind(Commands::totalonline, sv, this, std::placeholders::_1, std::placeholders::_2)},
+		{"tellraw", std::bind(Commands::tellraw, sv, this, std::placeholders::_1, std::placeholders::_2)},
+		{"sayraw", std::bind(Commands::sayraw, sv, this, std::placeholders::_1, std::placeholders::_2)},
     {"dev", std::bind(Commands::dev, sv, this, std::placeholders::_1, std::placeholders::_2)}
 	};
 }
@@ -175,7 +179,66 @@ void Commands::dev(Server * const sv, const Commands * const cmd,
     sv->admintell("DEV" + msg);
   }
 }
+void Commands::broadcast(Server * const sv, const Commands * const cmd,
+			Client * const cl, const std::vector<std::string>& args) {
+	if (args.size() >= 2) {
+		std::string msg = std::string(args[1]);
+		for (sz_t i = 2; i < args.size(); i++) {
+			msg.append(" " + args[i]);
+		}
+		sv->broadcastmsg(msg);
+	} else {
+		cl->tell("Broadcasts a message to all connections.");
+	}
+}
 
+void Commands::totalonline(Server * const sv, const Commands * const cmd,
+			Client * const cl, const std::vector<std::string>& args) {
+	cl->tell("Total connections to the server: " + std::to_string(sv->connsws.size()));
+}
+
+void Commands::tellraw(Server * const sv, const Commands * const cmd,
+			Client * const cl, const std::vector<std::string>& args) {
+	if (args.size() >= 3) {
+		u32 id = 0;
+		try {
+			id = stoul(args[1]);
+		} catch(std::invalid_argument& e) {
+			return;
+		} catch(std::out_of_range& e) {
+			return;
+		}
+		std::string msg = std::string(args[2]);
+		for (sz_t i = 3; i < args.size(); i++) {
+			msg.append(" " + args[i]);
+		}
+		Client * const target = cl->get_world()->get_cli(id);
+		if(target) {
+			cl->tell("Message sent.");
+			target->tell(msg);
+		} else {
+			cl->tell("User not found!");
+		}
+	} else {
+		cl->tell("Displays a message to a user as raw text.");
+		cl->tell("Usage: /tellraw (id) (message)");
+	}
+}
+
+void Commands::sayraw(Server * const sv, const Commands * const cmd,
+			Client * const cl, const std::vector<std::string>& args) {
+	if (args.size() >= 2) {
+		std::string msg = std::string(args[1]);
+		for (sz_t i = 2; i < args.size(); i++) {
+			msg.append(" " + args[i]);
+		}
+
+		cl->get_world()->broadcast(msg);
+	} else {
+		cl->tell("Send a message as raw text.");
+		cl->tell("Usage: /sayraw (message)");
+	}
+}
 void Commands::modlogin(Server * const sv, const Commands * const cmd,
 			Client * const cl, const std::vector<std::string>& args) {
 	if(!cl->is_mod() && args.size() == 2){
