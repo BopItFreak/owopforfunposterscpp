@@ -55,10 +55,10 @@ Commands::Commands(Server * const sv) {
 		{"worlds", std::bind(Commands::worlds, sv, this, std::placeholders::_1, std::placeholders::_2)},
 		{"setpbucket", std::bind(Commands::setpbucket, sv, this, std::placeholders::_1, std::placeholders::_2)},
 		{"doas", std::bind(Commands::doas, sv, this, std::placeholders::_1, std::placeholders::_2)},
-		//{"broadcast", std::bind(Commands::broadcast, sv, this, std::placeholders::_1, std::placeholders::_2)},
-		//{"totalonline", std::bind(Commands::totalonline, sv, this, std::placeholders::_1, std::placeholders::_2)},
-		//{"tellraw", std::bind(Commands::tellraw, sv, this, std::placeholders::_1, std::placeholders::_2)},
-		//{"sayraw", std::bind(Commands::sayraw, sv, this, std::placeholders::_1, std::placeholders::_2)},
+		{"broadcast", std::bind(Commands::broadcast, sv, this, std::placeholders::_1, std::placeholders::_2)},
+		{"totalonline", std::bind(Commands::totalonline, sv, this, std::placeholders::_1, std::placeholders::_2)},
+		{"tellraw", std::bind(Commands::tellraw, sv, this, std::placeholders::_1, std::placeholders::_2)},
+		{"sayraw", std::bind(Commands::sayraw, sv, this, std::placeholders::_1, std::placeholders::_2)},
     {"dev", std::bind(Commands::dev, sv, this, std::placeholders::_1, std::placeholders::_2)}
 	};
 }
@@ -179,7 +179,7 @@ void Commands::dev(Server * const sv, const Commands * const cmd,
     sv->admintell("DEV" + msg);
   }
 }
-/*void Commands::broadcast(Server * const sv, const Commands * const cmd,
+void Commands::broadcast(Server * const sv, const Commands * const cmd,
 			Client * const cl, const std::vector<std::string>& args) {
 	if (args.size() >= 2) {
 		std::string msg = std::string(args[1]);
@@ -238,7 +238,7 @@ void Commands::sayraw(Server * const sv, const Commands * const cmd,
 		cl->tell("Send a message as raw text.");
 		cl->tell("Usage: /sayraw (message)");
 	}
-}*/
+}
 void Commands::modlogin(Server * const sv, const Commands * const cmd,
 			Client * const cl, const std::vector<std::string>& args) {
 	if(!cl->is_mod() && args.size() == 2){
