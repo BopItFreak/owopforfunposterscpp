@@ -9,6 +9,7 @@ Commands::Commands(Server * const sv) {
 		//{"pass", std::bind(Commands::pass, sv, this, std::placeholders::_1, std::placeholders::_2)},
 		{"tell", std::bind(Commands::tell, sv, this, std::placeholders::_1, std::placeholders::_2)},
 		{"help", std::bind(Commands::help, sv, this, std::placeholders::_1, std::placeholders::_2)},
+		{"sayraw", std::bind(Commands::sayraw, sv, this, std::placeholders::_1, std::placeholders::_2)},
 		{"modlogin", std::bind(Commands::modlogin, sv, this, std::placeholders::_1, std::placeholders::_2)},
 		{"adminlogin", std::bind(Commands::adminlogin, sv, this, std::placeholders::_1, std::placeholders::_2)}
 	};
