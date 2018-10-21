@@ -183,7 +183,7 @@ void Commands::broadcast(Server * const sv, const Commands * const cmd,
 			Client * const cl, const std::vector<std::string>& args) {
 	if (args.size() >= 2) {
 		std::string msg = std::string(args[1]);
-		for (sz_t i = 2; i < args.size(); i++) {
+		for (size_t i = 2; i < args.size(); i++) {
 			msg.append(" " + args[i]);
 		}
 		sv->broadcastmsg(msg);
@@ -200,7 +200,7 @@ void Commands::totalonline(Server * const sv, const Commands * const cmd,
 void Commands::tellraw(Server * const sv, const Commands * const cmd,
 			Client * const cl, const std::vector<std::string>& args) {
 	if (args.size() >= 3) {
-		u32 id = 0;
+		uint32_t id = 0;
 		try {
 			id = stoul(args[1]);
 		} catch(std::invalid_argument& e) {
@@ -209,7 +209,7 @@ void Commands::tellraw(Server * const sv, const Commands * const cmd,
 			return;
 		}
 		std::string msg = std::string(args[2]);
-		for (sz_t i = 3; i < args.size(); i++) {
+		for (size_t i = 3; i < args.size(); i++) {
 			msg.append(" " + args[i]);
 		}
 		Client * const target = cl->get_world()->get_cli(id);
@@ -229,7 +229,7 @@ void Commands::sayraw(Server * const sv, const Commands * const cmd,
 			Client * const cl, const std::vector<std::string>& args) {
 	if (args.size() >= 2) {
 		std::string msg = std::string(args[1]);
-		for (sz_t i = 2; i < args.size(); i++) {
+		for (size_t i = 2; i < args.size(); i++) {
 			msg.append(" " + args[i]);
 		}
 
@@ -369,7 +369,7 @@ void Commands::teleport(Server * const sv, const Commands * const cmd,
 		}
 	} else if (args.size() == 4) {
 		return;
-		/*uint32_t id = 0;
+		uint32_t id = 0;
 		int32_t x = 0;
 		int32_t y = 0;
 		try {
@@ -388,7 +388,7 @@ void Commands::teleport(Server * const sv, const Commands * const cmd,
 			int32_t ly = p->y >> 4;
 			target->teleport(x, y);
 			cl->tell("Server: Teleported " + std::to_string(id) + " from " + std::to_string(lx) + ", " + std::to_string(ly) + " to " + std::to_string(x) + ", " + std::to_string(y));
-		}*/
+		}
 	} else {
 		cl->tell("Usage: /tp [ID] X Y or /tp ID");
 	}
