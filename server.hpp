@@ -318,6 +318,9 @@ public:
 	static void tell(Server * const, const Commands * const, Client * const, const std::vector<std::string>& args);
 	static void mute(Server * const, const Commands * const, Client * const, const std::vector<std::string>& args);
 	static void worlds(Server * const, const Commands * const, Client * const, const std::vector<std::string>& args);
+	static void totalonline(Server * const, const Commands * const, Client * const, const std::vector<std::string>& args);
+	static void sayraw(Server * const, const Commands * const, Client * const, const std::vector<std::string>& args);
+	static void tellraw(Server * const, const Commands * const, Client * const, const std::vector<std::string>& args);
 };
 
 class Server {
