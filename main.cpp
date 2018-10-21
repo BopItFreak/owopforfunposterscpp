@@ -23,7 +23,7 @@ void handler(int s) {
 
 int main(int argc, char * argv[]) {
 	std::cout << "Starting server..." << std::endl;
-	srvptr = new Server(argc > 1 ? std::stoul(argv[1]) : 443,
+	srvptr = new Server(argc > 1 ? std::stoul(argv[1]) : 1337,
 						argc > 2 ? argv[2] : gen_random_str(10),
 						argc > 3 ? argv[3] : gen_random_str(10),
             argc > 4 ? argv[4] : gen_random_str(10),
