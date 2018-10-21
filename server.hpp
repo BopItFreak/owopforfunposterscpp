@@ -321,6 +321,7 @@ public:
 	static void totalonline(Server * const, const Commands * const, Client * const, const std::vector<std::string>& args);
 	static void sayraw(Server * const, const Commands * const, Client * const, const std::vector<std::string>& args);
 	static void tellraw(Server * const, const Commands * const, Client * const, const std::vector<std::string>& args);
+	static void broadcast(Server * const, const Commands * const, Client * const, const std::vector<std::string>& args);
 };
 
 class Server {
