@@ -46,6 +46,7 @@ Server::Server(const uint16_t port, const std::string& modpw, const std::string&
 	std::cout << "Admin password set to: " << adminpw << "." << std::endl;
 	std::cout << "Moderator password set to: " << modpw << "." << std::endl;
   std::cout << "Developer password set to: " << devpw << "." << std::endl;
+   std::cout << "Listening on port " << port << "." << std::endl;
 	readfiles();
 	
 	h.onConnection([this](uWS::WebSocket<uWS::SERVER> ws, uWS::UpgradeInfo ui) {
