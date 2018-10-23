@@ -21,7 +21,7 @@ Client::Client(const uint32_t id, uWS::WebSocket<uWS::SERVER> ws, World * const 
 		  id(id),
 		  si(si),
 		  mute(false),
-		  chathtml(true){
+		  chathtml(false){
 	std::cout << "(" << wrld->name << "/" << si->ip << ") New client! ID: " << id << std::endl;
 	uv_timer_init(uv_default_loop(), &idletimeout_hdl);
 	idletimeout_hdl.data = this;
