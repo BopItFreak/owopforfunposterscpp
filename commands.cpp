@@ -563,7 +563,7 @@ void Commands::whois(Server * const sv, const Commands * const cmd,
 			cl->tell("-> Origin header: " + target->si->origin);
 			cl->tell("-> Warning level: " + std::to_string(target->get_penalty()));
 			cl->tell("-> Rank: " + std::to_string(target->get_rank()));
-			//cl->tell("-> User agent: " + target->si->ua);
+			cl->tell("-> User agent: " + target->si->ua);
 		}
 	} else {
 		cl->tell("Usage: /whois (Player ID)");
