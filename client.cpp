@@ -21,7 +21,7 @@ Client::Client(const uint32_t id, uWS::WebSocket<uWS::SERVER> ws, World * const 
 		  id(id),
 		  si(si),
 		  mute(false),
-		  chathtml(false){
+		  chathtml(true){
 	std::cout << "(" << wrld->name << "/" << si->ip << ") New client! ID: " << id << std::endl;
 	uv_timer_init(uv_default_loop(), &idletimeout_hdl);
 	idletimeout_hdl.data = this;
@@ -85,9 +85,9 @@ bool Client::can_chat() {
 void Client::chat(const std::string& msg) {
 	if (!mute) {
 		if(chathtml) {
-			wrld->broadcast("(A) " + get_nick() + ": " + msg);
+			wrld->broadcast(get_nick() + ": " + msg);
 		} else {
-			wrld->broadcast("" + get_nick() + ": " + msg);
+			wrld->broadcast(get_nick() + ": " + msg);
 		}
 	}
 }
