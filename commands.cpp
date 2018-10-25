@@ -561,9 +561,9 @@ void Commands::whois(Server * const sv, const Commands * const cmd,
 			cl->tell("-> Connections by this IP: " + std::to_string(sv->get_conns(target->si->ip)));
 			cl->tell("-> IP: " + target->si->ip);
 			cl->tell("-> Origin header: " + target->si->origin);
-			cl->tell("-> Warning level: " + std::to_string(target->get_penalty()));
+			cl->tell("-> Retard level: " + std::to_string(target->get_penalty()));
 			cl->tell("-> Rank: " + std::to_string(target->get_rank()));
-			cl->tell("-> User agent: " + target->si->ua);
+			//cl->tell("-> User agent: " + target->si->ua);
 		}
 	} else {
 		cl->tell("Usage: /whois (Player ID)");
