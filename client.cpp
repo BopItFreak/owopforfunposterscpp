@@ -44,7 +44,7 @@ void Client::get_chunk(const int32_t x, const int32_t y) const {
 }
 
 void Client::put_px(const int32_t x, const int32_t y, const RGB clr) {
-		if(can_edit()){
+		
 		uint32_t distx = (x >> 4) - (pos.x >> 8); distx *= distx;
 		uint32_t disty = (y >> 4) - (pos.y >> 8); disty *= disty;
 		const uint32_t dist = sqrt(distx + disty);
@@ -55,7 +55,7 @@ void Client::put_px(const int32_t x, const int32_t y, const RGB clr) {
 		lastclr = clr;
 		wrld->put_px(x, y, clr, rank);
 		updated();
-		}
+		
 	
 }
 
