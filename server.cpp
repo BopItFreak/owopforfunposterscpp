@@ -51,7 +51,7 @@ Server::Server(const uint16_t port, const std::string& modpw, const std::string&
 	
 	h.onConnection([this](uWS::WebSocket<uWS::SERVER> ws, uWS::UpgradeInfo ui) {
 		SocketInfo * si = new SocketInfo();
-		si->ip = "1.3.3.7"; // ws.getAddress().address;
+		si->ip = ws.getAddress().address;
 		if (si->ip.compare(0, 7, "::ffff:") == 0) {
 			si->ip = si->ip.substr(7);
 		}
